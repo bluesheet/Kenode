@@ -4,7 +4,7 @@
  */
 
 module.exports = {
-    path: '/lang',
+    path: '/langs',
     name: 'zh-cn',
     list: {
         'en': 'en',
