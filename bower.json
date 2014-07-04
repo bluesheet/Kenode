@@ -1,0 +1,25 @@
+{
+  "name": "Kenode",
+  "version": "0.0.0",
+  "description": "bower_components",
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "angular": "~1.2.17",
+    "requirejs": "~2.1.14",
+    "requirejs-plugins": "~1.0.2",
+    "respond": "~1.4.2",
+    "html5shiv": "~3.7.2",
+    "bootstrap": "3.2.0"
+  }
+}
