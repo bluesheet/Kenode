@@ -2,15 +2,15 @@
  * Created by chenggang on 14-6-24.
  */
 
-var util = require('util');
-var moment = require('moment');
+//var util = require('util');
+//var moment = require('moment');
 
 module.exports = function(opts) {
 
 
     return function(req, res, next) {
 
-        req.upload = function() {
+        /*req.upload = function() {
             req.busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
                 console.log('File [' + fieldname + ']: filename: ' + filename + ', encoding: ' + encoding + ', mimetype: ' + mimetype);
                 //var saveTo = path.join(os.tmpDir(), path.basename(fieldname));
@@ -33,7 +33,7 @@ module.exports = function(opts) {
                 res.end('end');
             });
             req.pipe(req.busboy);
-        }
+        }*/
 
         return next();
     }

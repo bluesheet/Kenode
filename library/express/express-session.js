@@ -5,7 +5,9 @@
 
 module.exports = function(config, connect) {
     var configgure = {
-        secret: config.secret
+        secret: config.secret,
+        resave: true,
+        saveUninitialized: true
     };
     if (config.maxAge > 0) {
         configgure.cookie = {
@@ -28,6 +30,5 @@ module.exports = function(config, connect) {
         default :
             break;
     }
-    console.log(configgure);
     return configgure;
 }
