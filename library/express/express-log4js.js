@@ -9,7 +9,6 @@ module.exports = {
 
     logger: function(config, log4js) {
 
-        console.log(path.join(config.path, config.filename));
         log4js.configure({
             appenders: [
                 { type: 'console' },
