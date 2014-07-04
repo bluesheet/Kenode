@@ -54,7 +54,40 @@ var Kenode = function(index, root) {
 
     app.use(express.static(path.join(_Root, config.static.path), require('./express/express-static')(config.static.options)));
 
+    _.each(config.directoryMap.paths, function(val, key) {
+        app.use(util.format('%s/%s', config.directoryMap.baseUrl, key), express.static(path.join(_Root, val)));
+    });
 
+    app.use('/', require('./express/express-router')({ path: path.join(_Root, config.controller.path), map: config.manualRouter }));
+
+    /// catch 404 and forward to error handler
+    app.use(function(req, res, next) {
+        res.notFound();
+    });
+
+    /// error handlers
+
+    // development error handler
+    // will print stacktrace
+    if (app.get('env') === 'development') {
+        app.use(function(err, req, res, next) {
+            res.status(err.status || 500);
+            res.render(config.views.error[err.status === 404 ? 404 : 500] || 'error', {
+                message: err.message,
+                error: err
+            });
+        });
+    }
+
+    // production error handler
+    // no stacktraces leaked to user
+    app.use(function(err, req, res, next) {
+        res.status(err.status || 500);
+        res.render(config.views.error[err.status === 404 ? 404 : 500] || 'error', {
+            message: err.message,
+            error: {}
+        });
+    });
 
     app.globals = {
         _Root: _Root,

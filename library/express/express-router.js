@@ -4,6 +4,7 @@
  */
 var express = require('express');
 var router = express.Router();
+var path = require('path');
 var util = require('util');
 var _ = require('underscore');
 var controller_obj = {};
@@ -12,8 +13,7 @@ var controller_path = '../../controller';
 
 module.exports = function(config) {
     var manual = config.map || {};
-    var path = config.path || '/controller';
-    controller_path = util.format('../..%s', path);
+    controller_path = config.path;
     var manual_map;
     _.each(manual, function(val, key) {
         manual_map = _.extend(manual_keys(key), { func: val });
@@ -34,8 +34,8 @@ function manual_keys(v) {
     return { method: method, url: url };
 }
 
-function get_pathinfo(path) {
-    var path_arr = path.split(':'),
+function get_pathinfo(_path) {
+    var path_arr = _path.split(':'),
         path_obj = {
             controller: path_arr[0],
             action: path_arr[1] || 'index'
@@ -43,12 +43,12 @@ function get_pathinfo(path) {
     return path_obj;
 }
 
-function get_api(path) {
-    var info = get_pathinfo(path),
+function get_api(_path) {
+    var info = get_pathinfo(_path),
         controller = util.format('%s%s', controller_prefix, info.controller),
         action = info.action;
     if (!controller_obj.hasOwnProperty(controller)) {
-        controller_obj[controller] = require(util.format('%s/%s', controller_path, info.controller));
+        controller_obj[controller] = require(path.join(controller_path, info.controller));
     }
     return controller_obj[controller][action];
 }
