@@ -65,7 +65,7 @@ var Kenode = function(index, root) {
         res.notFound();
     });
 
-    /// error handlers鹅鹅鹅
+    /// error handlers
 
     // development error handler
     // will print stacktrace
