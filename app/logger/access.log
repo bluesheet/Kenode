@@ -1,0 +1,48 @@
+[2014-07-05 16:02:31.513] [INFO] normal - HTTP服务已经开启在3000端口上
+[2014-07-05 16:02:56.477] [INFO] normal - GET / 200
+[2014-07-05 16:02:56.648] [ERROR] normal - GET /stylesheets/style.css 404
+[2014-07-05 18:13:40.340] [INFO] normal - HTTP服务已经开启在3000端口上
+[2014-07-05 18:13:52.867] [INFO] normal - GET /register 200
+[2014-07-05 18:13:52.885] [ERROR] normal - GET /theme/client/default/css/signup.css 404
+[2014-07-05 18:13:52.888] [ERROR] normal - GET /libs/requirejs/require.js 404
+[2014-07-05 18:14:17.594] [ERROR] normal - GET /libs/requirejs/require.js 404
+[2014-07-05 18:17:21.446] [INFO] normal - HTTP服务已经开启在3000端口上
+[2014-07-05 18:19:24.285] [INFO] normal - HTTP服务已经开启在3000端口上
+[2014-07-05 18:19:53.101] [INFO] normal - HTTP服务已经开启在3000端口上
+[2014-07-05 18:20:26.953] [INFO] normal - HTTP服务已经开启在3000端口上
+[2014-07-05 18:21:28.797] [INFO] normal - HTTP服务已经开启在3000端口上
+[2014-07-05 18:22:04.659] [INFO] normal - HTTP服务已经开启在3000端口上
+[2014-07-05 18:22:30.487] [INFO] normal - HTTP服务已经开启在3000端口上
+[2014-07-05 18:22:35.032] [INFO] normal - GET /libs/requirejs/require.js 200
+[2014-07-05 18:22:41.273] [WARN] normal - GET /register 304
+[2014-07-05 18:22:41.285] [ERROR] normal - GET /theme/client/default/css/signup.css 404
+[2014-07-05 18:22:41.286] [WARN] normal - GET /libs/requirejs/require.js 304
+[2014-07-05 18:22:41.340] [ERROR] normal - GET /jscript/signup.js 404
+[2014-07-05 18:22:42.152] [WARN] normal - GET /register 304
+[2014-07-05 18:22:42.161] [ERROR] normal - GET /theme/client/default/css/signup.css 404
+[2014-07-05 18:22:42.162] [WARN] normal - GET /libs/requirejs/require.js 304
+[2014-07-05 18:22:42.185] [ERROR] normal - GET /jscript/signup.js 404
+[2014-07-05 18:22:45.839] [WARN] normal - GET /register 304
+[2014-07-05 18:23:32.936] [ERROR] normal - GET /theme/client/default/css/signup.css 404
+[2014-07-06 00:00:11.626] [INFO] normal - HTTP服务已经开启在3000端口上
+[2014-07-06 00:00:19.549] [WARN] normal - GET / 304
+[2014-07-06 00:00:19.570] [ERROR] normal - GET /stylesheets/style.css 404
+[2014-07-06 00:00:22.056] [WARN] normal - GET /register 304
+[2014-07-06 00:00:22.095] [ERROR] normal - GET /theme/client/default/css/signup.css 404
+[2014-07-06 00:00:22.096] [WARN] normal - GET /libs/requirejs/require.js 304
+[2014-07-06 00:00:22.140] [ERROR] normal - GET /jscript/signup.js 404
+[2014-07-06 00:05:06.646] [INFO] normal - GET /theme/client/default/css/signup.css 200
+[2014-07-06 00:05:18.317] [WARN] normal - GET /register 304
+[2014-07-06 00:05:18.328] [WARN] normal - GET /theme/client/default/css/signup.css 304
+[2014-07-06 00:05:18.329] [WARN] normal - GET /libs/requirejs/require.js 304
+[2014-07-06 00:05:18.335] [INFO] normal - GET /libs/bootstrap/css/bootstrap.min.css 200
+[2014-07-06 00:05:18.398] [INFO] normal - GET /jscript/signup.js 200
+[2014-07-06 00:05:18.412] [INFO] normal - GET /libs/bootstrap/js/bootstrap.min.js 200
+[2014-07-06 00:05:18.413] [INFO] normal - GET /libs/jquery/jquery.min.js 200
+[2014-07-06 00:06:37.605] [INFO] normal - POST /register 200
+[2014-07-06 00:06:37.613] [WARN] normal - GET /theme/client/default/css/signup.css 304
+[2014-07-06 00:06:37.614] [WARN] normal - GET /libs/requirejs/require.js 304
+[2014-07-06 00:06:37.618] [WARN] normal - GET /libs/bootstrap/css/bootstrap.min.css 304
+[2014-07-06 00:06:37.646] [WARN] normal - GET /jscript/signup.js 304
+[2014-07-06 00:06:37.675] [WARN] normal - GET /libs/jquery/jquery.min.js 304
+[2014-07-06 00:06:37.675] [WARN] normal - GET /libs/bootstrap/js/bootstrap.min.js 304
