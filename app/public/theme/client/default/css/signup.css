@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+@IMPORT url("/libs/bootstrap/css/bootstrap.min.css");
+
+body {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #eeeeee;
+}
+
+.container {
+    max-width: 620px;
+}
+
+#signup input,
+#signup button {
+    max-width: 220px;
+}
+
+#signup .form-control {
+    display: inline;
+    margin-right: 10px;
+}
