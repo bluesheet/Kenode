@@ -6,7 +6,7 @@
 module.exports = {
     'get:/': ['client/index:index'],
     'get:/index.html': ['client/index:index'],
-    '/register': ['client/passport:register'],
-    '/login': ['client/passport:login'],
+    '/signup': ['client/passport:signup'],
+    '/signin': ['client/passport:signin'],
     '/upload': ['client/passport:upload']
 }

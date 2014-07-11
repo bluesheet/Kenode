@@ -5,10 +5,10 @@
 
 module.exports = {
     path: '/logger',
-    lang: 'zh-cn',
+    lang: 'en',
     level: 'auto',
     format: ':method :url :status',
     filename: 'access.log',
     maxLength: 500,
-    categgory: 'normal'
+    categgory: 'kenode'
 }

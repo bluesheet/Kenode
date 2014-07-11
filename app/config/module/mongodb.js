@@ -9,8 +9,8 @@ module.exports = {
             host: 'localhost',
             port: 27017,
             db: 'untitled',
-            uri: 'mongodb://localhost:27017/untitled'
+            uri: 'mongodb://localhost:27017/kenode'
         }
     ],
-    perfix: 'node_'
+    perfix: 'kenode_'
 }

@@ -16,6 +16,8 @@ module.exports = {
         'moment': '/node_modules/moment',
         'validator': '/node_modules/validator',
         'html5shiv': '/bower_components/html5shiv/dist',
-        'respond': '/bower_components/respond/dest'
+        'respond': '/bower_components/respond/dest',
+        'buttons': '/bower_components/Buttons',
+        'font-awesome': '/bower_components/Font-Awesome'
     }
 }

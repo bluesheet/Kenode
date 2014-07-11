@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title><%= title %></title>
+    <!-- Bootstrap -->
+    <link href="./theme/<%= viewPath %>/css/signup.css" rel="stylesheet">
+    <link rel="stylesheet" href="./libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./libs/buttons/css/main.css">
+    <link rel="stylesheet" href="./libs/buttons/css/buttons.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="./libs/html5shiv/html5shiv.min.js"></script>
+    <script src="./libs/respond/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<!-- Fixed navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container" id="nav_topbar">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Kenode</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">首页</a></li>
+                <li><a href="javascript:;">标签</a></li>
+                <li><a href="javascript:;">贴板</a></li>
+                <li><a href="javascript:;">社区</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/signin">登录</a></li>
+                <li><a href="/signup">注册</a></li>
+                <!--
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">thondery <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#"><span class="glyphicon glyphicon-cog"></span> 修改资料</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-adjust"></span> 更换头像</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-lock"></span> 修改密码</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-off"></span> 退出</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">退出</a></li>
+                -->
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</div>
+<div class="container" id="signup">
+    <h2 class="form-signin-heading">用户注册</h2>
+    <form class="form-horizontal" method="post" action="/register">
+        <div class="form-group">
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="username" placeholder="用户名" data-toggle="tooltip" title="Some tooltip text!">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="email" placeholder="邮箱">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-10">
+                <input type="password" class="form-control" name="password" placeholder="密码">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-10">
+                <input type="password" class="form-control" name="passed" placeholder="确认密码">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary btn-block pull-left">立即注册</button>
+                <a href="/signin" class="button button-rounded button-flat-highlight pull-right"><i class="fa fa-arrow-right"> 登录</i></a>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<!--<script data-main="./jscript/signup" src="./libs/requirejs/require.js" ></script>-->
+<script src="./libs/jquery/jquery.min.js"></script>
+<script src="./libs/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

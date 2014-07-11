@@ -2,18 +2,63 @@
 @IMPORT url("/libs/bootstrap/css/bootstrap.min.css");
 
 body {
-    padding-top: 40px;
-    padding-bottom: 40px;
     background-color: #eeeeee;
 }
 
-.container {
-    max-width: 620px;
+
+
+
+
+/* 横向放置的手机及分辨率更小的设备 */
+@media (max-width: 480px) {
+    #nav_topbar { max-width: 470px; }
+    #signup {
+        margin-top: 40px;
+        max-width: 300px;
+    }
+}/* 中等屏幕（桌面显示器，大于等于 992px） */
+@media (min-width: 768px) {
+    #nav_topbar { width: 740px;}
+    #signup {
+        margin-top: 40px;
+        min-width: 380px;
+    }
 }
 
-#signup input,
+/* 中等屏幕（桌面显示器，大于等于 992px） */
+@media (min-width: 992px) {
+    #nav_topbar { width: 970px;}
+    #signup {
+        margin-top: 40px;
+        min-width: 380px;
+    }
+}
+
+/* 大屏幕（大桌面显示器，大于等于 1200px） */
+@media (min-width: 1200px) {
+    #nav_topbar { width: 1170px;}
+    #signup {
+        margin-top: 40px;
+        min-width: 380px;
+    }
+}
+#signup {
+    padding-top: 40px;
+    max-width: 300px;
+}
+
+.container {
+    /*max-width: 1170px;*/
+}
+
+#signup input {
+    min-width: 270px;
+}
 #signup button {
-    max-width: 220px;
+    max-width: 150px; color: #ffffff;
+}
+#signup a {
+    color: #ffffff;
 }
 
 #signup .form-control {

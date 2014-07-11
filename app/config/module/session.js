@@ -8,9 +8,9 @@ module.exports = {
     mongodb: {
         host: 'localhost',
         port: 27017,
-        db: 'untitled',
-        collection: 'node_sessions'
+        db: 'kenode',
+        collection: 'kenode_sessions'
     },
-    secret: 'untitled',
+    secret: 'kenode',
     maxAge: 5  //Session的存活时间（单位：分钟），默认为0
 }

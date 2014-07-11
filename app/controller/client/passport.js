@@ -7,19 +7,19 @@ exports.index = function(req, res) {
 
 };
 
-exports.register = function(req, res) {
+exports.signup = function(req, res) {
     req.setView('client');
 
     if (req.method === 'POST') {
         console.log(req.body);
     }
-    res.display('register', {
+    res.display('signup', {
         title: '注册',
         viewPath: req.viewPath
     });
 };
 
-exports.login = function(req, res) {
+exports.signin = function(req, res) {
     req.setView('client');
     console.log(req.viewPath);
 

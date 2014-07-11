@@ -20,6 +20,8 @@
     "requirejs-plugins": "~1.0.2",
     "respond": "~1.4.2",
     "html5shiv": "~3.7.2",
-    "bootstrap": "3.2.0"
+    "bootstrap": "3.2.0",
+    "Buttons": "*",
+    "Font-Awesome": "~4.1.0"
   }
 }
