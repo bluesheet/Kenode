@@ -27,6 +27,7 @@ var Kenode = function(index, root) {
     var logger = express_log4js.logger(_.extend(config.logger, {path: path.join(_Root, config.logger.path)}), log4js);
     var express_langage = require('./express/express-langage');
     var express_views = require('./express/express-views');
+    var express_filter = require('./express/express-filter');
 
     app.set('port', process.env.PORT || config.port || 3000);
     app.set('views', path.join(_Root, config.views.path));
@@ -44,6 +45,7 @@ var Kenode = function(index, root) {
 
 
     app.use(express_views(_.extend(config.views, { views: { client: config.client.views, _admin: config._admin.views}})));
+    app.use(express_filter());
 
     app.use(cookieParser(config.session.secret));
     app.use(session(require('./express/express-session')(config.session, session)));

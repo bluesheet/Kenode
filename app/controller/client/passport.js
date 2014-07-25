@@ -11,7 +11,10 @@ exports.signup = function(req, res) {
     req.setView('client');
 
     if (req.method === 'POST') {
-        console.log(req.body);
+        //console.log(req.body);
+        req.filter('signup', function() {
+
+        });
     }
     res.display('signup', {
         title: '注册',
