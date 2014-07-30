@@ -18,19 +18,21 @@ var LocalStrategy = require('passport-local').Strategy;
 var util = require('util');
 var _ = require('underscore');
 
-var Kenode = function(index, root) {
-    var _Root = root || path.join(__dirname, '../app');
-    var config = require(util.format('%s/config', _Root))(index || 'default');
+var Kenode = function(dir, root, tag) {
+
+    var _Root = root || path.join(__dirname, '../');
+    var appDir = path.join(_Root, dir);
+    var config = require(util.format('%s/config', appDir))(tag || 'default');
 
     var app = express();
     var express_log4js = require('./express/express-log4js');
-    var logger = express_log4js.logger(_.extend(config.logger, {path: path.join(_Root, config.logger.path)}), log4js);
+    var logger = express_log4js.logger(_.extend(config.logger, {path: path.join(appDir, config.logger.path)}), log4js);
     var express_langage = require('./express/express-langage');
     var express_views = require('./express/express-views');
     var express_filter = require('./express/express-filter');
 
     app.set('port', process.env.PORT || config.port || 3000);
-    app.set('views', path.join(_Root, config.views.path));
+    app.set('views', path.join(appDir, config.views.path));
     if (config.views.suffix !== 'ejs') {
         app.engine(util.format('.%s', config.views.suffix), ejs.__express);
     }
@@ -54,13 +56,13 @@ var Kenode = function(index, root) {
 
     app.use(log4js.connectLogger(logger, express_log4js.connect(config.logger)));
 
-    app.use(express.static(path.join(_Root, config.static.path), require('./express/express-static')(config.static.options)));
+    app.use(express.static(path.join(appDir, config.static.path), require('./express/express-static')(config.static.options)));
 
     _.each(config.directoryMap.paths, function(val, key) {
-        app.use(util.format('%s/%s', config.directoryMap.baseUrl, key), express.static(path.join(__dirname, '../', val)));
+        app.use(util.format('%s/%s', config.directoryMap.baseUrl, key), express.static(path.join(_Root, val)));
     });
 
-    app.use('/', require('./express/express-router')({ path: path.join(_Root, config.controller.path), map: config.manualRouter }));
+    app.use('/', require('./express/express-router')({ path: path.join(appDir, config.controller.path), map: config.manualRouter }));
 
     /// catch 404 and forward to error handler
     app.use(function(req, res, next) {
@@ -91,23 +93,28 @@ var Kenode = function(index, root) {
         });
     });
 
-    app.globals = {
-        _Root: _Root,
-        _Config: config,
-        logger: logger,
-        Lang: express_langage({
-            path: path.join(_Root, config.lang.path),
-            lang: config.lang.name,
-            list: config.lang.list
-        }),
-        logLang: express_langage({
-            path: path.join(_Root, config.lang.path),
-            lang: config.logger.lang,
-            list: config.lang.list
-        })
-    };
-    return app;
-}
+    var Lang = express_langage({
+        path: path.join(appDir, config.lang.path),
+        lang: config.lang.name,
+        list: config.lang.list
+    });
+    var logLang = express_langage({
+        path: path.join(appDir, config.lang.path),
+        lang: config.logger.lang,
+        list: config.lang.list
+    });
 
+    global._Root = _Root;
+    global.appDir = appDir;
+    global.Config = config;
+    global.logger = logger;
+    global.Lang = Lang;
+    global.logLang = logLang;
+
+    var server = app.listen(app.get('port'), function() {
+        logger.info(logLang.SERVER_LISTENING_PORT, 'HTTP', server.address().port);
+    });
+
+}
 
 module.exports = Kenode;
