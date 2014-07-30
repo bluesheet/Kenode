@@ -1,18 +1,17 @@
 /**
  * Created by park on 2014/7/25.
+ * 中间件express-filter配置
  */
 
 var path = require('path');
 
 module.exports = function(opts) {
 
-    //var filter = require(path.join('../../app/filters/', ''));
-
     return function(req, res, next) {
 
-       req.filter = function(key, cont) {
-           require(path.join('../../app/filters/', key))(req, cont);
-       };
+        req.filter = function(key, cont) {
+            return require(path.join(opts.path, key))(req, cont);
+        };
 
         return next();
     }

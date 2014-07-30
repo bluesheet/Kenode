@@ -9,6 +9,7 @@ module.exports = {
     static: require('./module/static'),
     upload: require('./module/upload'),
     controller: require('./module/controller'),
+    filter: require('./module/filter'),
     model: require('./module/model'),
     lang: require('./module/langage'),
     views: require('./module/views'),

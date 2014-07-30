@@ -6,7 +6,7 @@
 module.exports = function(config) {
     var configgure = {
         maxObjects: config.maxObjects || 128,
-        maxLength: config.maxLength || 256,
+        maxLength: config.maxLength || 256
     };
     return configgure;
 }

@@ -10,5 +10,5 @@ module.exports = {
     format: ':method :url :status',
     filename: 'access.log',
     maxLength: 500,
-    categgory: 'kenode'
+    category: 'Kenode'
 }

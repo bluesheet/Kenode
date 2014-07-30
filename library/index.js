@@ -47,7 +47,7 @@ var Kenode = function(dir, root, tag) {
 
 
     app.use(express_views(_.extend(config.views, { views: { client: config.client.views, _admin: config._admin.views}})));
-    app.use(express_filter());
+    app.use(express_filter(_.extend(config.filter, { path: path.join(appDir, config.filter.path) })));
 
     app.use(cookieParser(config.session.secret));
     app.use(session(require('./express/express-session')(config.session, session)));
