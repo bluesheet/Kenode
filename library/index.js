@@ -15,7 +15,6 @@ var session = require('express-session');
 var flash = require('connect-flash');
 var log4js = require('log4js');
 var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
 var util = require('util');
 var _ = require('underscore');
 
@@ -27,7 +26,10 @@ var Kenode = function(dir, root, tag) {
 
     var app = express();
     var express_log4js = require('./express/express-log4js');
-    var logger = express_log4js.logger(_.extend(config.logger, {path: path.join(appDir, config.logger.path)}), log4js);
+    var logger = express_log4js.logger(
+        _.extend(config.logger, {
+            path: path.join(appDir, config.logger.path)
+        }), log4js);
     var express_langage = require('./express/express-langage');
     var express_views = require('./express/express_views');
     var express_filter = require('./express/express-filter');
@@ -43,7 +45,7 @@ var Kenode = function(dir, root, tag) {
         lang: config.lang.name,
         list: config.lang.list
     });
-    global.logLang = express_langage({
+    var logLang = global.logLang = express_langage({
         path: path.join(appDir, config.lang.path),
         lang: config.logger.lang,
         list: config.lang.list
@@ -67,24 +69,51 @@ var Kenode = function(dir, root, tag) {
     app.use(express_validator());
 
 
-    app.use(express_views(_.extend(config.views, { views: { client: config.client.views, _admin: config._admin.views}})));
-    app.use(express_filter(_.extend(config.filter, { path: path.join(appDir, config.filter.path) })));
+    app.use(express_views(
+        _.extend(config.views, {
+            views: {
+                client: config.client.views,
+                _admin: config._admin.views
+            }
+        })
+    ));
+    app.use(express_filter(
+        _.extend(config.filter, {
+            path: path.join(appDir, config.filter.path)
+        })
+    ));
 
     app.use(cookieParser(config.session.secret));
-    app.use(session(require('./express/express-session')(config.session, session)));
+    app.use(session(
+        require('./express/express-session')(config.session, session)
+    ));
     app.use(flash());
     app.use(passport.initialize());
     app.use(passport.session());
 
-    app.use(log4js.connectLogger(logger, express_log4js.connect(config.logger)));
+    app.use(log4js.connectLogger(
+        logger,
+        express_log4js.connect(config.logger)
+    ));
 
-    app.use(express.static(path.join(appDir, config.static.path), require('./express/express-static')(config.static.options)));
+    app.use(express.static(
+        path.join(appDir, config.static.path),
+        require('./express/express-static')(config.static.options)
+    ));
 
     _.each(config.directoryMap.paths, function(val, key) {
-        app.use(util.format('%s/%s', config.directoryMap.baseUrl, key), express.static(path.join(_Root, val)));
+        app.use(
+            util.format('%s/%s', config.directoryMap.baseUrl, key),
+            express.static(path.join(_Root, val))
+        );
     });
 
-    app.use('/', require('./express/express-router')({ path: path.join(appDir, config.controller.path), map: config.manualRouter }));
+    app.use('/',
+        require('./express/express-router')({
+            path: path.join(appDir, config.controller.path),
+            map: config.manualRouter
+        })
+    );
 
     global.Passport = express_passport(config.passport);
 
@@ -120,7 +149,6 @@ var Kenode = function(dir, root, tag) {
     var server = app.listen(app.get('port'), function() {
         logger.info(logLang.SERVER_LISTENING_PORT, 'HTTP', server.address().port);
     });
-
 
 
 
