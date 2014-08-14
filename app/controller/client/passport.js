@@ -2,6 +2,11 @@
  * Created by chenggang on 14-6-12.
  */
 
+var Thenjs = require('thenjs');
+var path = require('path');
+var util = require('util');
+var _ = require('underscore');
+var User = require(path.join(global.appDir, 'libs/user'))();
 
 exports.index = function(req, res) {
 
@@ -9,27 +14,103 @@ exports.index = function(req, res) {
 
 exports.signup = function(req, res) {
     req.setView('client');
-
-    if (req.method === 'POST') {
-        //console.log(req.body);
-        req.filter('signup', function() {
-
-        });
-    }
+    var _field = _.object(['username', 'email'], req.flash('field'));
+    var _errmsg = req.flash('errmsg').toString();
+    var _error = req.flash('error')[0];
+    var _token = res.token();
+    req.flash('SIGNUP_TOKEN', _token);
     res.display('signup', {
         title: '注册',
-        viewPath: req.viewPath
+        viewPath: req.viewPath,
+        usenav: 'signup',
+        style: 'signup',
+        auth: req.user,
+        reg: {
+            token: _token,
+            errmsg: _errmsg,
+            field: _field,
+            error: _error || {}
+        }
     });
 };
+
+exports.register = function(req, res, next) {
+    var errors = {};
+    req.flash('field', [
+        req.body.username.trim(),
+        req.body.email.trim()
+    ]);
+    req.filter('signup', function (err) {
+        if (err) {
+            err.forEach( function(e) {
+                errors[e.param] = {msg: e.msg}
+            });
+            req.flash('errmsg', err[0].msg);
+            req.flash('error', errors);
+            return res.redirect('./signup');
+        }
+    });
+    User.addUser({
+        username: req.body.username.trim(),
+        password: req.body.password.trim(),
+        email: req.body.email.trim(),
+        clientip: req.clientIp()
+    }, function(err, user) {
+        if (err) { return next(err) }
+        req.logIn(user, function(err) {
+            if (err) { return next(err); }
+            return res.redirect('/');
+        });
+    });
+}
 
 exports.signin = function(req, res) {
     req.setView('client');
-    console.log(req.viewPath);
-
-    res.display('login', {
-        viewPath: req.viewPath
+    var _field = _.object(['username'], req.flash('field'));
+    var _errmsg = req.flash('errmsg').toString();
+    var _error = req.flash('error')[0];
+    var _token = res.token();
+    req.flash('SIGNIN_TOKEN', _token);
+    res.display('signin', {
+        title: '登录',
+        viewPath: req.viewPath,
+        usenav: 'signin',
+        style: 'signin',
+        auth: req.user,
+        login: {
+            token: _token,
+            errmsg: _errmsg,
+            field: _field,
+            error: _error || {}
+        }
     });
 };
+
+exports.login = function(req, res, next) {
+    var errors = { username: {}, password: {} };
+    req.flash('field', [req.body.username]);
+    req.filter('signin', function (err) {
+        if (err) {
+            req.flash('errmsg', err[0].msg);
+            req.flash('error', errors);
+            return res.redirect('./signin');
+        }
+    });
+    global.Passport.authenticate('local', {
+        badRequestMessage: '用户名密码不能为空'
+    }, function(err, user, info) {
+        if (err) { return next(err) }
+        if (!user) {
+            req.flash('errmsg', info.message);
+            req.flash('error', errors);
+            return res.redirect('./signin');
+        }
+        req.logIn(user, function(err) {
+            if (err) { return next(err); }
+            return res.redirect('/');
+        });
+    })(req, res, next);
+}
 
 exports.upload = function(req, res) {
     var path = require('path');
@@ -71,4 +152,10 @@ exports.upload = function(req, res) {
               </form>\
             </body></html>');
     }
+}
+
+function task(err, arg, callback) { // 模拟异步任务
+    Thenjs.nextTick(function () {
+        callback(err, arg);
+    });
 }

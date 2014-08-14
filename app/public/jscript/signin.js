@@ -1,6 +1,7 @@
 /**
- * Created by chenggang on 14-6-19.
+ * Created by park on 2014/8/11.
  */
+
 
 
 require.config({
@@ -15,7 +16,7 @@ require.config({
     }
 });
 
-require(['underscore', 'passport/signup', 'json!passport/signup.json', 'validator', 'common'],
+require(['underscore', 'passport/signup', 'json!passport/signin.json', 'validator', 'common'],
     function(_, signup, foo, validator) {
         //alert($.fn.jquery);
         signup.init({

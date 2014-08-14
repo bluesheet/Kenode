@@ -1,0 +1,32 @@
+{
+    "name": "signin",
+    "container": "#signin",
+    "fields": {
+        "username": {
+            "name": "username",
+            "type": "text",
+            "isnull": false,
+            "message": [
+                "用户名不能为空"
+            ]
+        },
+        "password": {
+            "name": "password",
+            "type": "password",
+            "isnull": false,
+            "message": [
+                "密码不能为空"
+            ]
+        }
+    },
+    "control": {
+        "errmsg": {
+            "name": ".alert",
+            "html": "<div class=\"alert alert-danger\" role=\"alert\">{0}</div>"
+        },
+        "form": {
+            "group": "form-group",
+            "error": "has-error"
+        }
+    }
+}

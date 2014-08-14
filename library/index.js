@@ -12,6 +12,7 @@ var methodOverride = require('method-override');
 //var busboy = require('connect-busboy');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
+var flash = require('connect-flash');
 var log4js = require('log4js');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
@@ -28,8 +29,27 @@ var Kenode = function(dir, root, tag) {
     var express_log4js = require('./express/express-log4js');
     var logger = express_log4js.logger(_.extend(config.logger, {path: path.join(appDir, config.logger.path)}), log4js);
     var express_langage = require('./express/express-langage');
-    var express_views = require('./express/express-views');
+    var express_views = require('./express/express_views');
     var express_filter = require('./express/express-filter');
+    var express_validator = require('./express/express_validator');
+    var express_passport = require('./express/express_passport');
+
+    global._Root = _Root;
+    global.appDir = appDir;
+    global.Config = config;
+    global.logger = logger;
+    global.Lang = express_langage({
+        path: path.join(appDir, config.lang.path),
+        lang: config.lang.name,
+        list: config.lang.list
+    });
+    global.logLang = express_langage({
+        path: path.join(appDir, config.lang.path),
+        lang: config.logger.lang,
+        list: config.lang.list
+    });
+    global.Db = require('./mongoose')(_.extend(config.mongodb, { model: config.model }));
+    global.Dao = require('./model');
 
     app.set('port', process.env.PORT || config.port || 3000);
     app.set('views', path.join(appDir, config.views.path));
@@ -44,6 +64,7 @@ var Kenode = function(dir, root, tag) {
     app.use(bodyParser.urlencoded());
     app.use(bodyParser());
     app.use(methodOverride());
+    app.use(express_validator());
 
 
     app.use(express_views(_.extend(config.views, { views: { client: config.client.views, _admin: config._admin.views}})));
@@ -51,8 +72,9 @@ var Kenode = function(dir, root, tag) {
 
     app.use(cookieParser(config.session.secret));
     app.use(session(require('./express/express-session')(config.session, session)));
-    //app.use(passport.initialize());
-    //app.use(passport.session());
+    app.use(flash());
+    app.use(passport.initialize());
+    app.use(passport.session());
 
     app.use(log4js.connectLogger(logger, express_log4js.connect(config.logger)));
 
@@ -63,6 +85,8 @@ var Kenode = function(dir, root, tag) {
     });
 
     app.use('/', require('./express/express-router')({ path: path.join(appDir, config.controller.path), map: config.manualRouter }));
+
+    global.Passport = express_passport(config.passport);
 
     /// catch 404 and forward to error handler
     app.use(function(req, res, next) {
@@ -93,27 +117,13 @@ var Kenode = function(dir, root, tag) {
         });
     });
 
-    var Lang = express_langage({
-        path: path.join(appDir, config.lang.path),
-        lang: config.lang.name,
-        list: config.lang.list
-    });
-    var logLang = express_langage({
-        path: path.join(appDir, config.lang.path),
-        lang: config.logger.lang,
-        list: config.lang.list
-    });
-
-    global._Root = _Root;
-    global.appDir = appDir;
-    global.Config = config;
-    global.logger = logger;
-    global.Lang = Lang;
-    global.logLang = logLang;
-
     var server = app.listen(app.get('port'), function() {
         logger.info(logLang.SERVER_LISTENING_PORT, 'HTTP', server.address().port);
     });
+
+
+
+
 
 }
 

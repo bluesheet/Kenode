@@ -4,6 +4,7 @@
 
 var mongoose = require('mongoose');
 var util = require('util');
+var moment = require('moment');
 
 module.exports = function(opts) {
     var server = opts.server;
@@ -21,14 +22,17 @@ module.exports = function(opts) {
     var db = mongoose.createConnection(uri);
     db.on('error', function(err) {
         //MongoDB连接失败
-        logger.error(logLang.CONNECTION_FAILURE, 'MongoDB');
+        global.logger.error(global.logLang.CONNECTION_FAILURE, 'MongoDB');
     });
     db.once('open', function() {
         //MongoDB已经连接
-        logger.info(logLang.CONNECTION_SUCCESSFUL, 'MongoDB');
+        global.logger.info(global.logLang.CONNECTION_SUCCESSFUL, 'MongoDB');
     });
     db._prefix = opts.perfix;
     db._model = opts.model;
+    db.timestamp = function (date) {
+        return moment(date).format('X');
+    }
 
     return db;
 }

@@ -12,14 +12,14 @@ body {
 /* 横向放置的手机及分辨率更小的设备 */
 @media (max-width: 480px) {
     #nav_topbar { max-width: 470px; }
-    #signup {
+    #signin {
         margin-top: 40px;
         max-width: 300px;
     }
 }/* 中等屏幕（桌面显示器，大于等于 992px） */
 @media (min-width: 768px) {
     #nav_topbar { width: 740px;}
-    #signup {
+    #signin {
         margin-top: 40px;
         min-width: 380px;
     }
@@ -28,7 +28,7 @@ body {
 /* 中等屏幕（桌面显示器，大于等于 992px） */
 @media (min-width: 992px) {
     #nav_topbar { width: 970px;}
-    #signup {
+    #signin {
         margin-top: 40px;
         min-width: 380px;
     }
@@ -37,17 +37,17 @@ body {
 /* 大屏幕（大桌面显示器，大于等于 1200px） */
 @media (min-width: 1200px) {
     #nav_topbar { width: 1170px;}
-    #signup {
+    #signin {
         margin-top: 40px;
         min-width: 380px;
     }
 }
-#signup {
+#signin {
     padding-top: 40px;
     max-width: 300px;
 }
 
-#signup .alert {
+#signin .alert {
     max-width: 286px;
 }
 
@@ -55,17 +55,17 @@ body {
     /*max-width: 1170px;*/
 }
 
-#signup input {
+#signin input {
     min-width: 270px;
 }
-#signup button {
+#signin button {
     max-width: 150px; color: #ffffff;
 }
-#signup a {
+#signin a {
     color: #ffffff;
 }
 
-#signup .form-control {
+#signin .form-control {
     display: inline;
     margin-right: 10px;
 }

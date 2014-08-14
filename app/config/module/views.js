@@ -5,7 +5,7 @@
 
 module.exports = {
     path: '/views',
-    suffix: 'html',
+    suffix: 'ejs',
     error: {
         '404': 'error',
         '500': 'error'

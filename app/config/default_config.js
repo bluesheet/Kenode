@@ -18,6 +18,9 @@ module.exports = {
     mongodb: require('./module/mongodb'),
     manualRouter: require('./module/manualRouter'),
     directoryMap: require('./module/directoryMap'),
+    userFilter: require('./module/userFilter'),
+    pattern: require('./module/pattern'),
+    passport: require('./module/passport'),
     client: require('./module/client'),
     _admin: require('./module/_admin')
 }

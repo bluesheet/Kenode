@@ -12,5 +12,5 @@ module.exports = {
         collection: 'kenode_sessions'
     },
     secret: 'kenode',
-    maxAge: 5  //Session的存活时间（单位：分钟），默认为0
+    maxAge: 0  //Session的存活时间（单位：分钟），默认为0
 }
