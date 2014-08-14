@@ -11,7 +11,7 @@ module.exports = function(req, callback) {
     var _token = req.flash('SIGNIN_TOKEN');
     _.indexOf(_token, req.body.token)
     if (!req.body.token || _.indexOf(_token, req.body.token) === -1) {
-        callback([{msg: '请不要重复提交'}]);
+        callback([{ msg: '请不要重复提交' }]);
         return;
     }
     req.checkBody(params.username, '用户名不能为空').notEmpty();

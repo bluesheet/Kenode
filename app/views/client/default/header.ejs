@@ -49,13 +49,13 @@
                         <li><a href="#"><span class="glyphicon glyphicon-adjust"></span> 更换头像</a></li>
                         <li><a href="#"><span class="glyphicon glyphicon-lock"></span> 修改密码</a></li>
                         <li class="divider"></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-off"></span> 退出</a></li>
+                        <li><a href="/signout"><span class="glyphicon glyphicon-off"></span> <%= global.Lang.ACCOUNT_SIGN_OUT %></a></li>
                     </ul>
                 </li>
-                <li><a href="#">退出</a></li>
+                <li><a href="/signout"><%= global.Lang.ACCOUNT_SIGN_OUT %></a></li>
                 <% } else { %>
-                <li<% if (usenav == 'signin') { %> class="active"<% } %>><a href="/signin">登录</a></li>
-                <li<% if (usenav == 'signup') { %> class="active"<% } %>><a href="/signup">注册</a></li>
+                <li<% if (usenav == 'signin') { %> class="active"<% } %>><a href="/signin"><%= global.Lang.ACCOUNT_SIGN_IN %></a></li>
+                <li<% if (usenav == 'signup') { %> class="active"<% } %>><a href="/signup"><%= global.Lang.ACCOUNT_SIGN_UP %></a></li>
                 <% } %>
             </ul>
         </div><!--/.nav-collapse -->

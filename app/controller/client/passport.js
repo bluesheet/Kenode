@@ -12,6 +12,7 @@ exports.index = function(req, res) {
 
 };
 
+//用户注册页面
 exports.signup = function(req, res) {
     req.setView('client');
     var _field = _.object(['username', 'email'], req.flash('field'));
@@ -20,7 +21,7 @@ exports.signup = function(req, res) {
     var _token = res.token();
     req.flash('SIGNUP_TOKEN', _token);
     res.display('signup', {
-        title: '注册',
+        title: global.Lang.ACCOUNT_SIGN_UP,
         viewPath: req.viewPath,
         usenav: 'signup',
         style: 'signup',
@@ -34,6 +35,7 @@ exports.signup = function(req, res) {
     });
 };
 
+//用户注册接口
 exports.register = function(req, res, next) {
     var errors = {};
     req.flash('field', [
@@ -64,6 +66,7 @@ exports.register = function(req, res, next) {
     });
 }
 
+//用户登录页面
 exports.signin = function(req, res) {
     req.setView('client');
     var _field = _.object(['username'], req.flash('field'));
@@ -72,7 +75,7 @@ exports.signin = function(req, res) {
     var _token = res.token();
     req.flash('SIGNIN_TOKEN', _token);
     res.display('signin', {
-        title: '登录',
+        title: global.Lang.ACCOUNT_SIGN_IN,
         viewPath: req.viewPath,
         usenav: 'signin',
         style: 'signin',
@@ -86,6 +89,7 @@ exports.signin = function(req, res) {
     });
 };
 
+//用户登录接口
 exports.login = function(req, res, next) {
     var errors = { username: {}, password: {} };
     req.flash('field', [req.body.username]);
@@ -107,9 +111,16 @@ exports.login = function(req, res, next) {
         }
         req.logIn(user, function(err) {
             if (err) { return next(err); }
+            req.flash('field');
             return res.redirect('/');
         });
     })(req, res, next);
+}
+
+//用户退出接口
+exports.signout = function(req, res) {
+    req.logOut();
+    res.redirect('/');
 }
 
 exports.upload = function(req, res) {
@@ -152,10 +163,4 @@ exports.upload = function(req, res) {
               </form>\
             </body></html>');
     }
-}
-
-function task(err, arg, callback) { // 模拟异步任务
-    Thenjs.nextTick(function () {
-        callback(err, arg);
-    });
 }

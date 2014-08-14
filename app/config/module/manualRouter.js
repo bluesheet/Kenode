@@ -10,5 +10,6 @@ module.exports = {
     'post:/signup': ['client/passport:register'],
     'get:/signin': ['client/passport:signin'],
     'post:/signin': ['client/passport:login'],
+    'get:/signout': ['client/passport:signout'],
     '/upload': ['client/passport:upload']
 }
