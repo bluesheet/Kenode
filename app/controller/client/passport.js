@@ -57,8 +57,15 @@ exports.register = function(req, res, next) {
         password: req.body.password.trim(),
         email: req.body.email.trim(),
         clientip: req.clientIp()
-    }, function(err, user) {
+    }, function(err, user, info) {
         if (err) { return next(err) }
+        if (!user) {
+            req.flash('errmsg', info.msg);
+            errors = {};
+            errors[info.field] = { msg: info.msg };
+            req.flash('error', errors);
+            return res.redirect('./signup');
+        }
         req.logIn(user, function(err) {
             if (err) { return next(err); }
             return res.redirect('/');
@@ -101,7 +108,7 @@ exports.login = function(req, res, next) {
         }
     });
     global.Passport.authenticate('local', {
-        badRequestMessage: '用户名密码不能为空'
+        badRequestMessage: global.Lang['EMPTY_ACCOUNT^PASSWORD']
     }, function(err, user, info) {
         if (err) { return next(err) }
         if (!user) {

@@ -25,17 +25,44 @@ module.exports = function() {
     };
 
     this.addUser = function(fields, callback) {
-        var password = this.encryptPwd(fields.password);
-        global.Dao('user').create({
-            username: fields.username,
-            email: fields.email,
-            password: password.encrypt,
-            salt: password.salt,
-            regip: fields.clientip || 0,
-            lastip: fields.clientip || 0,
-            group: fields.group || ''
-        }, function(err, user) {
-            callback(err, _.pick(user, '_id', 'username', 'email'));
+        Thenjs( function(cont) {
+            //检查重名用户名
+            global.Dao('user').findOne({
+                username: fields.username
+            }, fields || {}, function (err, _doc) {
+                cont(err, _doc);
+            });
+        }).then( function(cont, doc) {
+            if (doc) {
+                callback(null, false, { field: 'username', msg: global.Lang['ERROR_USERNAME_EXISTS'] });
+                return;
+            }
+            //检查重名邮箱
+            global.Dao('user').findOne({
+                email: fields.email
+            }, fields || {}, function (err, _doc) {
+                cont(err, _doc);
+            });
+        }).then( function(cont, doc) {
+            if (doc) {
+                callback(null, false, { field: 'email', msg: global.Lang['ERROR_EMAIL_EXISTS'] });
+                return;
+            }
+            //写入新用户信息
+            var password = this.encryptPwd(fields.password);
+            global.Dao('user').create({
+                username: fields.username,
+                email: fields.email,
+                password: password.encrypt,
+                salt: password.salt,
+                regip: fields.clientip || 0,
+                lastip: fields.clientip || 0,
+                group: fields.group || ''
+            }, function(err, user) {
+                callback(err, _.pick(user, '_id', 'username', 'email'));
+            });
+        }).fail( function(cont, error) {
+            callback(error);
         });
     };
 
@@ -60,7 +87,7 @@ module.exports = function() {
                 });
             } else {
                 Thenjs.nextTick(function () {
-                    cont(null, false, { message: '用户名或密码错误' });
+                    cont(null, false, { message: global.Lang['ERROR_ACCOUNT^PASSWORD'] });
                 });
             }
         }).then( function(cont, user, info) {
