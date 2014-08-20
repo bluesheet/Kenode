@@ -34,7 +34,7 @@ module.exports = function() {
             });
         }).then( function(cont, doc) {
             if (doc) {
-                callback(null, false, { field: 'username', msg: global.Lang['ERROR_USERNAME_EXISTS'] });
+                callback(null, false, { field: 'username', msg: global.Lang('ERROR_USERNAME_EXISTS') });
                 return;
             }
             //检查重名邮箱
@@ -45,7 +45,7 @@ module.exports = function() {
             });
         }).then( function(cont, doc) {
             if (doc) {
-                callback(null, false, { field: 'email', msg: global.Lang['ERROR_EMAIL_EXISTS'] });
+                callback(null, false, { field: 'email', msg: global.Lang('ERROR_EMAIL_EXISTS') });
                 return;
             }
             //写入新用户信息
@@ -87,7 +87,7 @@ module.exports = function() {
                 });
             } else {
                 Thenjs.nextTick(function () {
-                    cont(null, false, { message: global.Lang['ERROR_ACCOUNT^PASSWORD'] });
+                    cont(null, false, { message: global.Lang('ERROR_ACCOUNT^PASSWORD') });
                 });
             }
         }).then( function(cont, user, info) {

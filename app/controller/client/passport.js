@@ -21,7 +21,7 @@ exports.signup = function(req, res) {
     var _token = res.token();
     req.flash('SIGNUP_TOKEN', _token);
     res.display('signup', {
-        title: global.Lang.ACCOUNT_SIGN_UP,
+        title: global.Lang('ACCOUNT_SIGN_UP'),
         viewPath: req.viewPath,
         usenav: 'signup',
         style: 'signup',
@@ -82,7 +82,7 @@ exports.signin = function(req, res) {
     var _token = res.token();
     req.flash('SIGNIN_TOKEN', _token);
     res.display('signin', {
-        title: global.Lang.ACCOUNT_SIGN_IN,
+        title: global.Lang('ACCOUNT_SIGN_IN'),
         viewPath: req.viewPath,
         usenav: 'signin',
         style: 'signin',
@@ -108,7 +108,7 @@ exports.login = function(req, res, next) {
         }
     });
     global.Passport.authenticate('local', {
-        badRequestMessage: global.Lang['EMPTY_ACCOUNT^PASSWORD']
+        badRequestMessage: global.Lang('EMPTY_ACCOUNT^PASSWORD')
     }, function(err, user, info) {
         if (err) { return next(err) }
         if (!user) {

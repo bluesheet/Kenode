@@ -40,11 +40,21 @@ var Kenode = function(dir, root, tag) {
     global.appDir = appDir;
     global.Config = config;
     global.logger = logger;
-    global.Lang = express_langage({
+
+    var langs = express_langage({
         path: path.join(appDir, config.lang.path),
         lang: config.lang.name,
         list: config.lang.list
     });
+    var Lang = function() {
+        var args = Array.prototype.slice.call(arguments);
+        if (langs[args[0]]) {
+            args[0] = langs[args[0]];
+        }
+        return util.format.apply(util.format, args);
+    };
+    global.Lang = Lang;
+
     var logLang = global.logLang = express_langage({
         path: path.join(appDir, config.lang.path),
         lang: config.logger.lang,
